@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #numero {
+            background: cyan;
+            text-align: center;
+            bottom: 50%;
+            left: 50%;
+            position: absolute;
+            padding: 3px;
+        }
+        body {
+            margin: 0px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div id="numero"></div>
+</body>
+<script>
+    
+let numX = 50;
+let numY = 50;
+let movX = 0;
+let movY = 0;
+let dir = 220;
+cambio = 0.1;
+velocidad=0.3;
+rotacion=1;
+aaa=9;
+contador=0;
+function milisegundos() {
+    contador++;
+    dir+=aaa;
+    if (contador > 100) {
+        aaa=0.1*Math.floor(Math.random()*100);    
+        contador=0;
+    }
+    movY = velocidad*Math.cos((dir+(-90))*(Math.PI/180));
+    movX = velocidad*Math.sin((dir+(-90))*(Math.PI/180));
+    numY += movY;
+	numX += movX;
+
+    if (numY > 97 ) {
+        dir *= -1;
+    }
+    if (numY <= 0 ) {
+        dir *= -1;
+    }
+    if (numX > 96) {
+        dir *= -1;
+        dir += 180;
+    }
+    if (numX < 0 ) {
+        dir *= -1;
+        dir += 180;
+
+    }
+	document.getElementById("numero").innerHTML = Math.floor(numX)+","+Math.floor(numY);
+    document.getElementById("numero").style.left = numX+"%"
+    document.getElementById("numero").style.bottom = numY+"%"
+}
+setInterval(milisegundos,10);
+</script>
+</html>
