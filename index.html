@@ -32,7 +32,7 @@ cambio = 0.1;
 velocidad=0.3;
 aaa=0;
 contador=0;
-const play = (frequency = 300, duration = 1e3) => {
+const play = (frequency, duration) => {
   const context = new AudioContext();
   const gainNode = context.createGain();
   const oscillator = context.createOscillator();
@@ -45,7 +45,7 @@ const play = (frequency = 300, duration = 1e3) => {
 function milisegundos() {
     contador++;
     dir+=aaa;
-    aaa+=0.012
+    aaa+=0.015
     movY = velocidad*Math.cos((dir+(-90))*(Math.PI/180));
     movX = velocidad*Math.sin((dir+(-90))*(Math.PI/180));
     numY += movY;
@@ -60,7 +60,7 @@ function milisegundos() {
         fondo=Math.abs(color-180);
         document.getElementById("numero").style.backgroundColor = "hsl("+color+",100%,50%)";
         document.getElementById("body").style.backgroundColor = "hsl("+fondo+",100%,50%)";
-        play(659.255,15);
+        play(523.251,100);
     }
     if (numY > 97 ) {
         numY=97;
@@ -70,7 +70,7 @@ function milisegundos() {
         fondo=Math.abs(color-180);
         document.getElementById("numero").style.backgroundColor = "hsl("+color+",100%,50%)";
         document.getElementById("body").style.backgroundColor = "hsl("+fondo+",100%,50%)";
-        play(391.995,15);
+        play(659.255,100);
     }
     if (numX > 96) {
         numX=96;
@@ -81,7 +81,7 @@ function milisegundos() {
         fondo=Math.abs(color-180);
         document.getElementById("numero").style.backgroundColor = "hsl("+color+",100%,50%)";
         document.getElementById("body").style.backgroundColor = "hsl("+fondo+",100%,50%)";
-        play(587.330,15); 
+        play(587.330,100); 
     }
     if (numY < 0 ) {
         numY=0;
@@ -92,7 +92,7 @@ function milisegundos() {
         fondo=Math.abs(color-180);
         document.getElementById("numero").style.backgroundColor = "hsl("+color+",100%,50%)";
         document.getElementById("body").style.backgroundColor = "hsl("+fondo+",100%,50%)";
-        play(523.251,15);
+        play(391.995,100);
     }
     velocidad*=1.01
 	document.getElementById("numero").innerHTML = Math.floor(numX)+","+Math.floor(numY);
