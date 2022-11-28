@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>colorines</title>
+    <title>Document</title>
     <style>
         #numero {
             background: cyan;
@@ -32,15 +32,36 @@ cambio = 0.1;
 velocidad=0.3;
 aaa=0;
 contador=0;
+const play = (frequency = 300, duration = 1e3) => {
+  const context = new AudioContext();
+  const gainNode = context.createGain();
+  const oscillator = context.createOscillator();
+  oscillator.frequency.value = frequency;
+  oscillator.connect(gainNode);
+  gainNode.connect(context.destination);
+  oscillator.start(0);
+  setTimeout(() => oscillator.stop(), duration);
+};
 function milisegundos() {
     contador++;
     dir+=aaa;
-    aaa+=0.0021
+    aaa+=0.012
     movY = velocidad*Math.cos((dir+(-90))*(Math.PI/180));
     movX = velocidad*Math.sin((dir+(-90))*(Math.PI/180));
     numY += movY;
 	numX += movX;
 
+    if (numX < 0 ) {
+        numX=0;
+        dir *= -1;
+        dir += 180;
+        aaa=0;
+        color=Math.floor(Math.random()*360);
+        fondo=Math.abs(color-180);
+        document.getElementById("numero").style.backgroundColor = "hsl("+color+",100%,50%)";
+        document.getElementById("body").style.backgroundColor = "hsl("+fondo+",100%,50%)";
+        play(659.255,15);
+    }
     if (numY > 97 ) {
         numY=97;
         dir *= -1;
@@ -49,17 +70,7 @@ function milisegundos() {
         fondo=Math.abs(color-180);
         document.getElementById("numero").style.backgroundColor = "hsl("+color+",100%,50%)";
         document.getElementById("body").style.backgroundColor = "hsl("+fondo+",100%,50%)";
-
-    }
-    if (numY < 0 ) {
-        numY=0;
-        dir *= -1;
-        velocidad=0.3;
-        aaa=0;
-        color=Math.floor(Math.random()*360);
-        fondo=Math.abs(color-180);
-        document.getElementById("numero").style.backgroundColor = "hsl("+color+",100%,50%)";
-        document.getElementById("body").style.backgroundColor = "hsl("+fondo+",100%,50%)";
+        play(391.995,15);
     }
     if (numX > 96) {
         numX=96;
@@ -70,21 +81,24 @@ function milisegundos() {
         fondo=Math.abs(color-180);
         document.getElementById("numero").style.backgroundColor = "hsl("+color+",100%,50%)";
         document.getElementById("body").style.backgroundColor = "hsl("+fondo+",100%,50%)";
+        play(587.330,15); 
     }
-    if (numX < 0 ) {
-        numX=0;
+    if (numY < 0 ) {
+        numY=0;
         dir *= -1;
-        dir += 180;
+        velocidad=0.5;
         aaa=0;
         color=Math.floor(Math.random()*360);
         fondo=Math.abs(color-180);
         document.getElementById("numero").style.backgroundColor = "hsl("+color+",100%,50%)";
         document.getElementById("body").style.backgroundColor = "hsl("+fondo+",100%,50%)";
+        play(523.251,15);
     }
-    velocidad*=1.001
+    velocidad*=1.01
 	document.getElementById("numero").innerHTML = Math.floor(numX)+","+Math.floor(numY);
     document.getElementById("numero").style.left = numX+"%"
     document.getElementById("numero").style.bottom = numY+"%"
+    
 }
 setInterval(milisegundos,10);
 </script>
