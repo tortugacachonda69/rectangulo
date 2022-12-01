@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>colorines</title>
     <style>
         #numero {
             background: #000;
             text-align: center;
             position: absolute;
-            padding: 3px;
+            padding: 30px;
+            border-radius: 60%;
         }
         body {
             margin: 0px;
@@ -28,22 +29,32 @@ let numX = 50;
 let numY = 50;
 let movX = 0;
 let movY = 0;
-let dir = Math.floor(Math.random()*360) ;
-cambio = 0.1;
-velocidad=0.2;
-aaa=0;
+let dir = Math.floor(Math.random()*350)+10 ;
+
+velocidad=2;
+gravedad=0.1
 contador=0;
+numZ=10;
 
 function milisegundos() {
     contador++;
-    dir+=aaa;
-    aaa+=0.015
-    velocidad*=1.01
     movY = velocidad*Math.cos((dir+(-90))*(Math.PI/180));
     movX = velocidad*Math.sin((dir+(-90))*(Math.PI/180));
+    numZ +=gravedad
     numY += movY;
 	numX += movX;
-
+    gravedad-=0.0002
+    velocidad*=0.9995
+    if (numZ < 5 ) {
+        numZ=6
+        velocidad=1.5
+        gravedad=Math.abs(gravedad)
+        color=Math.floor(Math.random()*360);
+        fondo=Math.abs(color-180);
+        document.getElementById("numero").style.backgroundColor = "hsl("+color+",100%,50%)";
+        document.getElementById("body").style.backgroundColor = "hsl("+fondo+",100%,50%)";
+        synth.triggerAttackRelease(220.00,0.1);
+    }
     if (numX < 0 ) {
         numX=0;
         dir *= -1;
@@ -52,46 +63,39 @@ function milisegundos() {
         fondo=Math.abs(color-180);
         document.getElementById("numero").style.backgroundColor = "hsl("+color+",100%,50%)";
         document.getElementById("body").style.backgroundColor = "hsl("+fondo+",100%,50%)";
-        synth.triggerAttackRelease(587.33,0.1);
+        synth.triggerAttackRelease(261.63,0.1);
     }
-    if (numY > 97 ) {
-        numY=97;
+    if (numY > document.documentElement.scrollHeight-document.getElementById("numero").clientHeight ) {
+        numY=document.documentElement.scrollHeight-document.getElementById("numero").clientHeight-2
         dir *= -1;
-        velocidad=2;
-        aaa=3
         color=Math.floor(Math.random()*360);
         fondo=Math.abs(color-180);
         document.getElementById("numero").style.backgroundColor = "hsl("+color+",100%,50%)";
         document.getElementById("body").style.backgroundColor = "hsl("+fondo+",100%,50%)";
-        synth.triggerAttackRelease(659.25,0.1);
+        synth.triggerAttackRelease(164.81,0.1);
     }
-    if (numX > 96) {
-        numX=96;
+    if (numX > document.body.clientWidth-document.getElementById("numero").clientWidth) {
+        numX=document.body.clientWidth-document.getElementById("numero").clientWidth-2;
         dir *= -1;
         dir += 180;
-        velocidad=0.5;
-        aaa=000;
         color=Math.floor(Math.random()*360);
         fondo=Math.abs(color-180);
         document.getElementById("numero").style.backgroundColor = "hsl("+color+",100%,50%)";
         document.getElementById("body").style.backgroundColor = "hsl("+fondo+",100%,50%)";
-        synth.triggerAttackRelease(523.251,0.1); 
+        synth.triggerAttackRelease(261.63,0.1); 
     }
     if (numY < 0 ) {
-        numY=0;
+        numY=1;
         dir *= -1;
-        aaa=0.2;
-        velocidad=1;
         color=Math.floor(Math.random()*360);
         fondo=Math.abs(color-180);
         document.getElementById("numero").style.backgroundColor = "hsl("+color+",100%,50%)";
         document.getElementById("body").style.backgroundColor = "hsl("+fondo+",100%,50%)";
-        synth.triggerAttackRelease(391.995,0.1);
+        synth.triggerAttackRelease(164.81,0.1);
     }
-	document.getElementById("numero").innerHTML = Math.floor(numX)+","+Math.floor(numY);
-    document.getElementById("numero").style.left = numX+"%"
-    document.getElementById("numero").style.bottom = numY+"%"
-    
+    document.getElementById("numero").style.left = numX+"px"
+    document.getElementById("numero").style.bottom = numY+"px"
+    document.getElementById("numero").style.padding = numZ+"px"
 }
 setInterval(milisegundos,10);
 </script>
