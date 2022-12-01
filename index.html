@@ -53,7 +53,7 @@ function milisegundos() {
         fondo=Math.abs(color-180);
         document.getElementById("numero").style.backgroundColor = "hsl("+color+",100%,50%)";
         document.getElementById("body").style.backgroundColor = "hsl("+fondo+",100%,50%)";
-        synth.triggerAttackRelease(220.00,0.1);
+        synth.triggerAttackRelease(220.00,1);
     }
     if (numX < 0 ) {
         numX=0;
@@ -63,7 +63,7 @@ function milisegundos() {
         fondo=Math.abs(color-180);
         document.getElementById("numero").style.backgroundColor = "hsl("+color+",100%,50%)";
         document.getElementById("body").style.backgroundColor = "hsl("+fondo+",100%,50%)";
-        synth.triggerAttackRelease(261.63,0.1);
+        synth.triggerAttackRelease(261.63,1);
     }
     if (numY > document.documentElement.scrollHeight-document.getElementById("numero").clientHeight ) {
         numY=document.documentElement.scrollHeight-document.getElementById("numero").clientHeight-2
@@ -72,7 +72,7 @@ function milisegundos() {
         fondo=Math.abs(color-180);
         document.getElementById("numero").style.backgroundColor = "hsl("+color+",100%,50%)";
         document.getElementById("body").style.backgroundColor = "hsl("+fondo+",100%,50%)";
-        synth.triggerAttackRelease(164.81,0.1);
+        synth.triggerAttackRelease(164.81,1);
     }
     if (numX > document.body.clientWidth-document.getElementById("numero").clientWidth) {
         numX=document.body.clientWidth-document.getElementById("numero").clientWidth-2;
@@ -82,7 +82,7 @@ function milisegundos() {
         fondo=Math.abs(color-180);
         document.getElementById("numero").style.backgroundColor = "hsl("+color+",100%,50%)";
         document.getElementById("body").style.backgroundColor = "hsl("+fondo+",100%,50%)";
-        synth.triggerAttackRelease(261.63,0.1); 
+        synth.triggerAttackRelease(261.63,1); 
     }
     if (numY < 0 ) {
         numY=1;
@@ -91,7 +91,7 @@ function milisegundos() {
         fondo=Math.abs(color-180);
         document.getElementById("numero").style.backgroundColor = "hsl("+color+",100%,50%)";
         document.getElementById("body").style.backgroundColor = "hsl("+fondo+",100%,50%)";
-        synth.triggerAttackRelease(164.81,0.1);
+        synth.triggerAttackRelease(164.81,1);
     }
     document.getElementById("numero").style.left = numX+"px"
     document.getElementById("numero").style.bottom = numY+"px"
